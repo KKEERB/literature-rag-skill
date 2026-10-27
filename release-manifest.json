@@ -1,0 +1,183 @@
+{
+  "schema": "literature-release-manifest/1",
+  "state": "CANDIDATE_NOT_REVIEWED",
+  "files": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "release-audit.md",
+    "release-manifest.json",
+    "skills/literature-rag-workflow/SKILL.md",
+    "skills/literature-rag-workflow/references/method/chunking.md",
+    "skills/literature-rag-workflow/references/method/retrieval.md",
+    "skills/literature-rag-workflow/references/method/review-and-examples.md",
+    "skills/literature-rag-workflow/references/method/workflow.md",
+    "skills/literature-rag-workflow/references/operation.md",
+    "skills/literature-rag-workflow/references/setup.md",
+    "skills/literature-rag-workflow/runtime/configs/knowledge_system.json",
+    "skills/literature-rag-workflow/runtime/configs/reading_collaboration.json",
+    "skills/literature-rag-workflow/runtime/docs/portable_deep_reading.md",
+    "skills/literature-rag-workflow/runtime/docs/reading_collaboration.md",
+    "skills/literature-rag-workflow/runtime/profiles/content_quality_v21.json",
+    "skills/literature-rag-workflow/runtime/profiles/fte_knowledge.json",
+    "skills/literature-rag-workflow/runtime/profiles/magnetosphere_ionosphere.json",
+    "skills/literature-rag-workflow/runtime/profiles/sxi_cusp.json",
+    "skills/literature-rag-workflow/runtime/requirements.txt",
+    "skills/literature-rag-workflow/runtime/schemas/fast_pdf_analysis.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/fast_pdf_review.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/machine_evidence_pack.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/project_profile.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/review_report_v21.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/review_status.schema.json",
+    "skills/literature-rag-workflow/runtime/schemas/run_config.schema.json",
+    "skills/literature-rag-workflow/runtime/scripts/adaptive_content.py",
+    "skills/literature-rag-workflow/runtime/scripts/apply_knowledge_reviews.py",
+    "skills/literature-rag-workflow/runtime/scripts/artifact_attribution.py",
+    "skills/literature-rag-workflow/runtime/scripts/audit_knowledge_integrity.py",
+    "skills/literature-rag-workflow/runtime/scripts/common.py",
+    "skills/literature-rag-workflow/runtime/scripts/fast_pdf_intake.py",
+    "skills/literature-rag-workflow/runtime/scripts/fast_pdf_preflight.py",
+    "skills/literature-rag-workflow/runtime/scripts/knowledge_dependencies.py",
+    "skills/literature-rag-workflow/runtime/scripts/knowledge_quality.py",
+    "skills/literature-rag-workflow/runtime/scripts/knowledge_recovery.py",
+    "skills/literature-rag-workflow/runtime/scripts/knowledge_system.py",
+    "skills/literature-rag-workflow/runtime/scripts/knowledge_system_core.py",
+    "skills/literature-rag-workflow/runtime/scripts/literature_cross_validation.py",
+    "skills/literature-rag-workflow/runtime/scripts/literature_learning.py",
+    "skills/literature-rag-workflow/runtime/scripts/model_settings.py",
+    "skills/literature-rag-workflow/runtime/scripts/note_html_integrity.py",
+    "skills/literature-rag-workflow/runtime/scripts/onboarding_doctor.py",
+    "skills/literature-rag-workflow/runtime/scripts/portable_config.py",
+    "skills/literature-rag-workflow/runtime/scripts/portable_deep_read.py",
+    "skills/literature-rag-workflow/runtime/scripts/portable_fs.py",
+    "skills/literature-rag-workflow/runtime/scripts/portable_identity.py",
+    "skills/literature-rag-workflow/runtime/scripts/prepare_knowledge_revision.py",
+    "skills/literature-rag-workflow/runtime/scripts/publish_knowledge_revision.py",
+    "skills/literature-rag-workflow/runtime/scripts/publish_reading_revision.py",
+    "skills/literature-rag-workflow/runtime/scripts/reader_note_v3.py",
+    "skills/literature-rag-workflow/runtime/scripts/reading_sessions.py",
+    "skills/literature-rag-workflow/runtime/scripts/research_card_daily.py",
+    "skills/literature-rag-workflow/runtime/scripts/review_checklists.py",
+    "skills/literature-rag-workflow/runtime/scripts/review_knowledge_quality.py",
+    "skills/literature-rag-workflow/runtime/scripts/source_edition_projection.py",
+    "skills/literature-rag-workflow/runtime/scripts/v21_quality.py",
+    "skills/literature-rag-workflow/runtime/scripts/v2_core.py",
+    "skills/literature-rag-workflow/runtime/scripts/validate_outputs.py",
+    "skills/literature-rag-workflow/runtime/templates/claims.jsonl",
+    "skills/literature-rag-workflow/runtime/templates/evidence_spans.jsonl",
+    "skills/literature-rag-workflow/runtime/templates/figures_index.md",
+    "skills/literature-rag-workflow/runtime/templates/knowledge_model.v2.json",
+    "skills/literature-rag-workflow/runtime/templates/metadata.yaml",
+    "skills/literature-rag-workflow/runtime/templates/methods.jsonl",
+    "skills/literature-rag-workflow/runtime/templates/producer_v21.md",
+    "skills/literature-rag-workflow/runtime/templates/review_status.yaml",
+    "skills/literature-rag-workflow/runtime/templates/reviewer_v21.md",
+    "skills/literature-rag-workflow/runtime/tests/test_fast_pdf_core_integration.py",
+    "skills/literature-rag-workflow/runtime/tests/__init__.py",
+    "skills/literature-rag-workflow/runtime/tests/test_fast_pdf_intake.py",
+    "skills/literature-rag-workflow/runtime/tests/test_fast_pdf_preflight.py",
+    "skills/literature-rag-workflow/runtime/tests/test_knowledge_recovery.py",
+    "skills/literature-rag-workflow/runtime/tests/test_knowledge_system.py",
+    "skills/literature-rag-workflow/runtime/tests/test_model_settings.py",
+    "skills/literature-rag-workflow/runtime/tests/test_onboarding_doctor.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_config.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_deep_read_finalize.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_encoding.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_fs.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_identity.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_validate_outputs.py",
+    "skills/literature-rag-workflow/runtime/tests/test_quality_transactions.py",
+    "skills/literature-rag-workflow/runtime/tests/test_reading_collaboration.py",
+    "skills/literature-rag-workflow/runtime/tests/test_revision_source_regions.py",
+    "skills/literature-rag-workflow/runtime/tests/test_ten_item_review.py",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/LICENSE",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/NOTICE.md",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/scripts/audit_snapshot.py",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/scripts/pdf_read_preflight.py",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/scripts/test_pdf_read_preflight.py",
+    "tests/test_release_guard.py",
+    "tools/release_guard.py",
+    "skills/literature-rag-workflow/runtime/scripts/local_stage_validation.py",
+    "skills/literature-rag-workflow/runtime/tests/test_portable_v2_pipeline.py",
+    "skills/literature-rag-workflow/LICENSE",
+    "skills/literature-rag-workflow/runtime/third_party/academic-research-skills/ORIGIN.md",
+    "skills/literature-rag-workflow/runtime/third_party/DEPENDENCIES.md"
+  ],
+  "reviewed_content": [
+    {
+      "file": "skills/literature-rag-workflow/runtime/tests/test_knowledge_system.py",
+      "sha256": "c37d74b09c70b44aab0627a0da6e6a22bf1a471032200e9cef3db7e39e1fc663",
+      "rules": [
+        "source_doi",
+        "zotero_identity"
+      ],
+      "reviewer": "Codex machine review; not human approval",
+      "reason": "Static source() fixture: generic name, placeholder DOI and literal parent/attachment keys; fabricated hashes and fixture provenance."
+    },
+    {
+      "file": "skills/literature-rag-workflow/runtime/tests/test_portable_identity.py",
+      "sha256": "3b3b9c729e1efa91a0e8c7a808e28e94042b213d8c4ccbabe5de89e8b826dd7a",
+      "rules": [
+        "zotero_identity"
+      ],
+      "reviewer": "Codex machine review; not human approval",
+      "reason": "Synthetic identity validation fixtures construct literal placeholder parent and attachment keys; no real Zotero instance used."
+    },
+    {
+      "file": "skills/literature-rag-workflow/runtime/tests/test_portable_v2_pipeline.py",
+      "sha256": "7a18ace03a213f6f9a51c5ae2ca4de02bd7f31fda19d8d81d522f2521edf37d9",
+      "rules": [
+        "source_doi",
+        "zotero_identity"
+      ],
+      "reviewer": "Codex machine review; not human approval",
+      "reason": "Test paper uses placeholder DOI and alphabetic parent/attachment identifiers; later local tempfile synthetic scaffold uses mock IDs; compatibility fields only."
+    },
+    {
+      "file": "skills/literature-rag-workflow/runtime/tests/test_portable_deep_read_finalize.py",
+      "sha256": "185de3c55361ca76f921e423af7239ad1e768937ce8a348128c7b8185ce2ab72",
+      "rules": [
+        "zotero_identity"
+      ],
+      "reviewer": "Codex machine review; not human approval",
+      "reason": "SchemaGateTests constructs a synthetic review with a literal example attachment key inside a temporary test workspace."
+    }
+  ],
+  "attestations": {
+    "privacy_and_source_rights": {
+      "passed": true,
+      "reviewer": "Codex automated review; not human or legal approval",
+      "evidence": "Codex machine review: known private markers and credential/path patterns scanned, flagged fixtures examined and private examples replaced. User authorized release of their local workflow; provenance of unmarked historical material cannot be proven exhaustively.",
+      "candidate_sha256": "ebd5d2d42301a9109de0ba16f69be12ad4b73363eadac92a210f30ffb0ece6c7"
+    },
+    "third_party_licenses": {
+      "passed": true,
+      "reviewer": "Codex automated review; not human or legal approval",
+      "evidence": "Codex machine review: upstream preflight and accompanying files match pinned source; MIT project license, CC BY-NC 4.0 notice and third-party dependency licenses included. Not legal advice; unidentified historical borrowing cannot be excluded.",
+      "candidate_sha256": "ebd5d2d42301a9109de0ba16f69be12ad4b73363eadac92a210f30ffb0ece6c7"
+    },
+    "dependency_closure": {
+      "passed": true,
+      "reviewer": "Codex automated review; not human or legal approval",
+      "evidence": "Clean macOS Python environment installed declared requirements without PyMuPDF; 255 runtime and 17 release-guard tests passed. Static dependency scan passed; not proof of every possible dynamic or platform path.",
+      "candidate_sha256": "ebd5d2d42301a9109de0ba16f69be12ad4b73363eadac92a210f30ffb0ece6c7"
+    },
+    "real_model_and_deep_reading": {
+      "passed": true,
+      "reviewer": "Codex automated review; not human or legal approval",
+      "evidence": "Independent requested model tasks processed synthetic PDF with final renderer; 9 verified items published and retrieved in an isolated database. Prior independently reviewed synthetic deep stage passed final schema and v21 gates. Underlying model identity NOT_VERIFIED; no human review claimed.",
+      "candidate_sha256": "ebd5d2d42301a9109de0ba16f69be12ad4b73363eadac92a210f30ffb0ece6c7"
+    },
+    "macos_native": {
+      "passed": true,
+      "reviewer": "Codex automated review; not human or legal approval",
+      "evidence": "One macOS host tested with a fresh Python environment, actual synthetic PDF rendering and isolated workflow. This is not validation of every macOS configuration or Windows.",
+      "candidate_sha256": "ebd5d2d42301a9109de0ba16f69be12ad4b73363eadac92a210f30ffb0ece6c7"
+    }
+  },
+  "scope": "Draft local PDF, retrieval, selected deep reading and human review; no Zotero integration or full-text translation. macOS only; Windows not included or verified.",
+  "release_scope": "core_only",
+  "release_platforms": [
+    "macos"
+  ]
+}

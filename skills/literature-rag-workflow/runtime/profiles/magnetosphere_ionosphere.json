@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "project_id": "magnetosphere_ionosphere",
+  "display_name": "磁层-电离层耦合",
+  "reader_language": "zh-CN",
+  "translation_mode": "layered_bilingual",
+  "target_questions": [
+    "论文对场向电流（FAC）的方向、尺度、闭合路径和跨高度对应关系提供哪一层直接证据？",
+    "磁尾重联与极光、粒子沉降或亚暴响应之间的时序链条如何建立，哪些环节仍只是映射或因果推断？",
+    "论文如何量化粒子沉降、Poynting flux、Joule heating 或电导变化所代表的能量输入，覆盖范围与误差是什么？",
+    "磁层—电离层映射采用何种磁场模型、足点和传播假设，其空间、时间与模型不确定性如何影响结论？",
+    "单星时间序列、SXI proxy 和多源观测分别能支持什么，仍缺少哪些全球拓扑、能量闭合或因果验证？"
+  ],
+  "terminology": {
+    "FAC": "field-aligned current，场向电流；局地扰动反演、跨高度对应与全球电流闭合必须分层表述",
+    "magnetotail reconnection": "磁尾重联；局地喷流、偶极化或粒子特征不能自动等同于全球重联拓扑已经确认",
+    "auroral particle precipitation": "极光粒子沉降；需区分粒子能谱、光学辐射与由模型反演的能量通量",
+    "energy input": "磁层向电离层的能量输入；需注明粒子能量通量、Poynting flux、Joule heating 或其他具体量及其积分范围",
+    "magnetosphere-ionosphere mapping": "磁层—电离层映射；磁足点和共轭关系依赖磁场模型、边界条件、传播时间与测量覆盖",
+    "conjugacy": "共轭性；空间接近、时序相似或模型足点重合只能形成支持链，不能自动证明同一因果源",
+    "single-spacecraft time series": "单星时间序列；观测到的变化同时包含空间结构穿越和真实时间演化",
+    "SXI proxy": "SXI/SWCX 遥感 proxy；图像亮化或 LOS 响应不能独立确定 FAC、粒子沉降、磁尾重联来源或全球磁拓扑"
+  },
+  "relevance_dimensions": [
+    "场向电流、多高度电流系统与电流闭合",
+    "磁尾重联、亚暴过程与电离层响应",
+    "极光粒子沉降、能量通量、电导与 Joule heating",
+    "磁层—电离层磁足点映射、共轭性与传播时延",
+    "单星与多点观测的空间—时间消歧",
+    "SXI、光学极光、地面磁场与粒子场联合证据"
+  ],
+  "claim_boundaries": [
+    "单点或单星观测只能约束局地时间序列；未完成多点时序、边界运动和空间结构检验时，不得升级为全球电流闭合、全球磁拓扑或唯一因果确认",
+    "FAC、极光、粒子沉降和磁尾局地重联特征的共现只能形成耦合支持；传播延迟、替代驱动和选择效应未排除时，不得写成已确认的单一因果链",
+    "磁足点或场线映射是依赖磁场模型与边界条件的推断，不得表述为直接测得的磁力线连接或无误差共轭关系",
+    "SXI brightening、LOS 一致性或其他遥感 proxy 不得独立升级为 FAC 来源、粒子能量输入、磁尾重联事件或全球拓扑确认",
+    "极光亮度、粒子谱型或局地能量通量在缺少仪器响应、面积覆盖、时间积分和能量闭合时，不能代表整个磁层—电离层系统的总能量输入",
+    "simulation、empirical mapping、proxy、candidate 与 project_application 必须保留各自证据层级，不能替代共轭多点观测或独立拓扑验证"
+  ],
+  "forbidden_phrases": [
+    "single-point observation confirms global magnetosphere-ionosphere coupling",
+    "single-spacecraft sequence proves the global topology",
+    "SXI proxy confirms magnetotail reconnection",
+    "mapped footprint is a directly measured field-line connection",
+    "单点观测确认全球磁层电离层耦合",
+    "SXI亮化证明磁尾重联及其全球拓扑"
+  ],
+  "priority_policy": {
+    "P0": "deep_read_plus_external_context",
+    "P1": "deep_read_pdf_first",
+    "P2": "triage_then_on_demand_deep_read"
+  },
+  "external_research_policy": {
+    "trigger_priorities": ["P0"],
+    "trigger_on_controversy": true,
+    "min_sources": 2,
+    "max_sources": 5,
+    "roles": ["background", "independent_support", "limitation_or_counterevidence"],
+    "upload_local_pdf": false
+  }
+}

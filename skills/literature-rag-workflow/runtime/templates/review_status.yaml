@@ -1,0 +1,12 @@
+project: SXI-cusp研究
+paper_id:
+status: draft
+priority: unknown
+sxi_cusp_relevance: unknown
+translation_mode: layered_bilingual
+external_research_status: not_run
+figure_review_status: partial_or_caption_only
+human_checked_by:
+human_checked_at:
+unresolved_critical_warnings: []
+notes: Pipeline v2 deterministic render from schema v2 knowledge model.

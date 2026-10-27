@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/literature-run-config-v1.json",
+  "title": "Literature Workflow Run Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "collection_key",
+    "project_profile",
+    "project_profile_path",
+    "quality_profile_path",
+    "artifact_dir_name",
+    "project_tag",
+    "display_name",
+    "expected_parent_count",
+    "expected_pdf_attachment_count",
+    "expected_note_count",
+    "promotion_policy",
+    "include_subcollections",
+    "queue_filename",
+    "multi_pdf_overrides",
+    "reuse_overrides",
+    "note_key_overrides"
+  ],
+  "$defs": {
+    "itemKey": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{8}$"
+    },
+    "noteKey": {
+      "type": "string",
+      "pattern": "^(?:[A-Z0-9]{8})?$"
+    },
+    "contentHashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reader_note", "research_card"],
+      "properties": {
+        "reader_note": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "research_card": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "reuseOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "write_mode",
+        "reader_note_key",
+        "research_card_key",
+        "priority",
+        "artifact_dir_name",
+        "expected_content_sha256"
+      ],
+      "properties": {
+        "write_mode": {"const": "tag_only"},
+        "reader_note_key": {"$ref": "#/$defs/itemKey"},
+        "research_card_key": {"$ref": "#/$defs/itemKey"},
+        "priority": {"enum": ["P0", "P1", "P2"]},
+        "artifact_dir_name": {"type": "string", "minLength": 1},
+        "expected_content_sha256": {"$ref": "#/$defs/contentHashes"}
+      }
+    },
+    "noteKeyOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reader_note_key", "research_card_key"],
+      "properties": {
+        "reader_note_key": {"$ref": "#/$defs/noteKey"},
+        "research_card_key": {"$ref": "#/$defs/noteKey"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "collection_key": {"$ref": "#/$defs/itemKey"},
+    "selected_parent_keys": {
+      "description": "Optional explicit processing scope. When present, only these Zotero parent items are inventoried.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/itemKey"}
+    },
+    "document_mode": {
+      "description": "Defaults to standard for backward compatibility. book_chapter_full enables book/chapter-aware content-count policy.",
+      "enum": ["standard", "book_chapter_full"],
+      "default": "standard"
+    },
+    "expected_chapter_count": {
+      "description": "Run-level expected chapter count for book_chapter_full routing only; it is not a chapter-completion attestation.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "project_profile": {"type": "string", "minLength": 1},
+    "project_profile_path": {"type": "string", "pattern": "^profiles/[^/]+\\.json$"},
+    "quality_profile_path": {"type": "string", "pattern": "^profiles/[^/]+\\.json$"},
+    "artifact_dir_name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "project_tag": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string", "minLength": 1},
+    "expected_parent_count": {"type": "integer", "minimum": 1},
+    "expected_pdf_attachment_count": {"type": "integer", "minimum": 1},
+    "expected_note_count": {"type": "integer", "minimum": 2},
+    "promotion_policy": {"enum": ["qa_auto", "manual_after_sample_review"]},
+    "include_subcollections": {"type": "boolean"},
+    "queue_filename": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*\\.csv$"},
+    "multi_pdf_overrides": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z0-9]{8}$"},
+      "additionalProperties": {"$ref": "#/$defs/itemKey"}
+    },
+    "reuse_overrides": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z0-9]{8}$"},
+      "additionalProperties": {"$ref": "#/$defs/reuseOverride"}
+    },
+    "note_key_overrides": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z0-9]{8}$"},
+      "additionalProperties": {"$ref": "#/$defs/noteKeyOverride"}
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": ["document_mode"],
+        "properties": {
+          "document_mode": {"const": "book_chapter_full"}
+        }
+      },
+      "then": {
+        "required": ["expected_chapter_count"]
+      },
+      "else": {
+        "not": {
+          "required": ["expected_chapter_count"]
+        }
+      }
+    }
+  ]
+}

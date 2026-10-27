@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "First-round full-paper compact analysis",
+  "type": "object",
+  "required": [
+    "schema",
+    "source_pdf_sha256",
+    "producer",
+    "paper",
+    "coverage",
+    "items"
+  ],
+  "properties": {
+    "schema": {
+      "const": "fast-pdf-analysis/1"
+    },
+    "source_pdf_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "producer": {
+      "type": "object",
+      "required": [
+        "task_id",
+        "model",
+        "reasoning_effort"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[a-z][a-z0-9_-]{0,31}$"
+        }
+      }
+    },
+    "paper": {
+      "type": "object",
+      "required": [
+        "title",
+        "authors",
+        "year",
+        "doi",
+        "paper_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authors": {
+          "type": [
+            "string",
+            "array"
+          ]
+        },
+        "year": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "doi": {
+          "type": "string"
+        },
+        "paper_type": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "pages_read",
+        "sections",
+        "figures_tables",
+        "equations"
+      ],
+      "properties": {
+        "pages_read": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/coverageUnit"
+          }
+        },
+        "figures_tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coverageUnit"
+          }
+        },
+        "equations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coverageUnit"
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "text_zh",
+          "epistemic_status",
+          "evidence",
+          "usable_for",
+          "cannot_support"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "claim",
+              "method",
+              "limitation",
+              "figure",
+              "definition"
+            ]
+          },
+          "text_zh": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string"
+          },
+          "epistemic_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "object",
+            "required": [
+              "pdf_page_indices",
+              "quote"
+            ],
+            "properties": {
+              "pdf_page_indices": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "usable_for": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cannot_support": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "coverageUnit": {
+      "type": "object",
+      "required": [
+        "id",
+        "pages",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "pages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

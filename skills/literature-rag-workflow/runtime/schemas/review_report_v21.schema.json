@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pipeline v2.1 Independent Review Report",
+  "type": "object",
+  "required": [
+    "paper_id",
+    "attachment_key",
+    "producer_task_id",
+    "reviewer_task_id",
+    "model_content_sha256",
+    "reviewed_at",
+    "revision_round",
+    "decision",
+    "checks",
+    "blocking_findings",
+    "non_blocking_findings"
+  ],
+  "properties": {
+    "paper_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attachment_key": {
+      "type": "string",
+      "pattern": "^(?:|[A-Z0-9]{8})$"
+    },
+    "producer_task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision_round": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "decision": {
+      "enum": [
+        "pass",
+        "revise",
+        "blocked"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object"
+      }
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "non_blocking_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "source_pdf_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "attachment_key": {
+            "const": ""
+          }
+        },
+        "required": [
+          "attachment_key"
+        ]
+      },
+      "then": {
+        "required": [
+          "source_pdf_sha256"
+        ]
+      }
+    }
+  ]
+}

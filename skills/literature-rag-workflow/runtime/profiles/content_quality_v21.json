@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "prompt_version": "pipeline-v2.3-daily-card-fulltext-cn-2026-08-19",
+  "legacy_prompt_versions": [
+    "pipeline-v2.2-research-training-reader-note-2026-08-19",
+    "pipeline-v2.1-deep-read-curated-2026-07-10"
+  ],
+  "generation_mode": "deep_read_curated",
+  "quality_level": "omidi_equivalent",
+  "reader_note_template_version": "space_physics_research_training_v1",
+  "reader_note_contract": {
+    "guiding_questions": {"min": 3, "max": 5},
+    "core_work": {"min": 1, "max": 3},
+    "method_checks": {"min": 2},
+    "first_principles_claim_assessments": {"min_when_applicable": 1},
+    "group_meeting_core_work": {"min": 1, "max": 3}
+  },
+  "research_card_template_version": "research_daily_brief_v1",
+  "research_card_contract": {
+    "visible_chinese_characters": {"min": 1000, "max": 1800},
+    "finding_items": {"min": 1, "max": 2},
+    "objective_challenges": {"exact": 3},
+    "qa_items": {"exact": 4}
+  },
+  "claim_count": {"min": 4, "max": 8},
+  "method_count": {"min": 2},
+  "section_count": {"min": 3},
+  "bilingual_key_sentence_count": {"min": 2},
+  "figure_count": {"min": 3, "max": 6},
+  "question_count": {"min": 10, "max": 12},
+  "quote_word_count": {"min": 8, "max": 40},
+  "known_placeholder_phrases": [
+    "Potential background/method/mechanism support for SXI-cusp研究",
+    "Potential background/method/mechanism support for FTE知识库",
+    "requires human verification before publication use",
+    "Use as a checked method or evidence-layer anchor after human review",
+    "本文围绕 {title} 讨论 cusp / dayside magnetosphere 相关的观测、模型或方法问题",
+    "待完成全文提取、中文概念重建与证据锚定"
+  ],
+  "generic_method_phrases": [
+    "Use as a checked method or evidence-layer anchor after human review",
+    "method or evidence-layer anchor",
+    "按 observational 为主，同时保留观测论文检查、模拟论文检查、理论论文检查",
+    "方法细节需要人工核查"
+  ],
+  "generic_anchor_patterns": [
+    "abstract/results/conclusion",
+    "abstract / results / conclusion",
+    "abstract/introduction/method",
+    "method/data/model",
+    "unknown"
+  ],
+  "external_source_count": {"min": 2, "max": 5},
+  "allowed_extraction_routes": ["normal", "layout", "raw", "ocr"]
+}

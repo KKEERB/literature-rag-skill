@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+*.sqlite
+*.sqlite3
+*.db
+*.pdf
+*.log
+work/
+reports/
+outputs/
+!skills/literature-rag-workflow/runtime/schemas/**

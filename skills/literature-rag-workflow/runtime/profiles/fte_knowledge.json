@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "project_id": "fte_knowledge",
+  "display_name": "FTE知识库",
+  "reader_language": "zh-CN",
+  "translation_mode": "layered_bilingual",
+  "target_questions": [
+    "论文对 FTE 的形成机制、磁拓扑、三维结构或生命周期提供哪一层直接证据？",
+    "论文如何定量约束 FTE 的运动、尺度、磁通、能量、发生条件或太阳风控制？",
+    "论文使用哪些观测或模拟诊断识别 FTE，哪些 confuser 仍不能被唯一排除？",
+    "磁层顶 FTE 与极光、电离层、地面或远程成像响应之间的耦合证据达到什么强度？"
+  ],
+  "terminology": {
+    "FTE": "flux transfer event；必须区分观测确认、模拟结构、自动 detector candidate 与机制类比",
+    "bipolar B_N": "边界法向磁场的双极变化；是常用诊断但不能单独唯一确认 FTE",
+    "core field": "通量绳内部的轴向或核心磁场增强；需要与坐标、边界和其他观测联合解释",
+    "flux rope": "具有缠绕磁力线或轴向结构的磁通绳；形态相似不等于已证明磁拓扑",
+    "magnetopause mapping": "磁层顶事件向电离层、极光或地面响应的映射；必须保留时序和映射误差",
+    "comparative planetology": "水星等非地球磁层结果只能作为比较证据，不能直接替代地球结论"
+  },
+  "relevance_dimensions": [
+    "FTE 形成机制、磁拓扑与生命周期",
+    "运动、尺度、磁通、能量和太阳风控制",
+    "原位观测、多点诊断与时空消歧",
+    "MHD、hybrid 或 kinetic 模拟识别与验证",
+    "磁层顶—电离层—极光—地面耦合",
+    "SXI 等远程成像支持与非唯一 confuser"
+  ],
+  "claim_boundaries": [
+    "bipolar B_N、core field 或单一 flux-rope morphology 均不能单独确认 FTE",
+    "单星时间序列不能自动排除空间结构与时间演化的混淆",
+    "simulation-derived FTE、局地坐标诊断和自动 detector 输出必须保留模型或候选层级",
+    "极光、电离层、地面或 SXI 响应只能作为耦合支持，不能唯一确定磁层顶 FTE 来源",
+    "水星等非地球结果只能标为比较证据，不能直接升级为地球 FTE 结论"
+  ],
+  "forbidden_phrases": [
+    "bipolar B_N proves an FTE",
+    "single-spacecraft signature uniquely confirms an FTE",
+    "simulation candidate is an observed FTE",
+    "auroral or SXI response uniquely identifies the magnetopause FTE source"
+  ],
+  "priority_policy": {
+    "P0": "deep_read_plus_external_context",
+    "P1": "deep_read_pdf_first",
+    "P2": "deep_read_pdf_first"
+  },
+  "grading_policy": {
+    "dimensions": [
+      {"id": "fte_directness", "label_zh": "FTE直接性", "minimum": 0, "maximum": 2},
+      {"id": "mechanism_topology_value", "label_zh": "机制与拓扑价值", "minimum": 0, "maximum": 2},
+      {"id": "method_reusability", "label_zh": "方法可复用性", "minimum": 0, "maximum": 2},
+      {"id": "quantitative_evidence_strength", "label_zh": "定量证据强度", "minimum": 0, "maximum": 2},
+      {"id": "cross_observation_simulation_validation", "label_zh": "跨观测与模拟验证价值", "minimum": 0, "maximum": 2}
+    ],
+    "thresholds": {
+      "P0": {"min_total": 8, "max_total": 10, "required_fte_directness": 2, "foundational_exception_allowed": true},
+      "P1": {"min_total": 4, "max_total": 7, "scope_limited_exception_allowed": true},
+      "P2": {"min_total": 0, "max_total": 3}
+    },
+    "reviewer_confirmation_required": true
+  },
+  "external_research_policy": {
+    "trigger_priorities": ["P0"],
+    "trigger_on_controversy": true,
+    "min_sources": 2,
+    "max_sources": 5,
+    "roles": ["background", "independent_support", "limitation_or_counterevidence"],
+    "upload_local_pdf": false
+  }
+}

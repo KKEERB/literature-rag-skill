@@ -1,0 +1,114 @@
+{
+  "schema_version": "2.0",
+  "project": "SXI-cusp研究",
+  "project_profile": "sxi_cusp",
+  "paper_id": "",
+  "title": "",
+  "authors": "",
+  "year": "",
+  "doi": "",
+  "citekey": "",
+  "zotero_item_key": "",
+  "zotero_attachment_key": "",
+  "source_pdf_path": "",
+  "source_pdf_sha256": "",
+  "priority": "unknown",
+  "status": "draft",
+  "paper_type": "unknown",
+  "translation_mode": "layered_bilingual",
+  "topic_tags": [],
+  "abstract_original": "",
+  "abstract_zh": "",
+  "reader_note": {
+    "template_version": "space_physics_research_training_v1",
+    "one_sentence_summary": "",
+    "guiding_questions": [],
+    "core_work": [
+      {
+        "title": "",
+        "what_zh": "",
+        "why_zh": "",
+        "how_zh": "",
+        "result_zh": "",
+        "claim_ids": [],
+        "method_ids": []
+      }
+    ],
+    "background": {
+      "known_zh": "",
+      "gap_zh": "",
+      "paper_response_zh": ""
+    },
+    "physical_mechanism": {
+      "phenomenon_zh": "",
+      "cause_chain": [],
+      "equations_or_constraints": [],
+      "observables": []
+    },
+    "first_principles": {
+      "applicability": "required",
+      "reason_zh": "",
+      "starting_points": [],
+      "derivation_chain": [],
+      "assumptions": [],
+      "method_rationale_zh": "",
+      "claim_assessments": [],
+      "new_questions": []
+    },
+    "method_audit": {
+      "design_summary_zh": "",
+      "checks": []
+    },
+    "contribution_audit": {
+      "previous_state_zh": "",
+      "contributions": [],
+      "publication_value_zh": "",
+      "remaining_uncertainty_zh": ""
+    },
+    "critical_audit": {
+      "evidence_strength_zh": "",
+      "method_limits": [],
+      "alternative_explanations": [],
+      "future_directions": []
+    },
+    "research_transfer": {
+      "direct_relation_ids": [],
+      "adaptable_relation_ids": [],
+      "not_applicable_zh": [],
+      "new_questions": []
+    },
+    "group_meeting_summary": {
+      "background_zh": "",
+      "research_question_zh": "",
+      "core_work_zh": [],
+      "main_contribution_zh": "",
+      "main_limitation_zh": "",
+      "research_takeaway_zh": ""
+    }
+  },
+  "reading_map": {
+    "research_question": "",
+    "prerequisites": [],
+    "terms": {},
+    "reading_route": [],
+    "next_validation": ""
+  },
+  "section_guides": [],
+  "core_claims": [],
+  "methods": [],
+  "figures": [],
+  "limitations": [],
+  "controversies": [],
+  "external_context": [],
+  "external_research_status": "not_run",
+  "project_relations": [],
+  "cannot_support": [],
+  "open_questions": [],
+  "self_test": [],
+  "generation": {
+    "generated_at": "",
+    "generated_by": "Codex pipeline v2",
+    "prompt_version": "pipeline-v2.2-research-training-reader-note-2026-08-19",
+    "mode": "deep_read_draft"
+  }
+}

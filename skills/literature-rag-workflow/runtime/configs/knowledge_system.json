@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "database_path": "~/.literature-rag-workflow/knowledge.sqlite3",
+  "review_dir": "~/.literature-rag-workflow/review",
+  "stale_after_seconds": 3600,
+  "verify_pdf_hashes": true,
+  "zotero_optional": true,
+  "paper_model_globs": [],
+  "zotero_collections": [],
+  "zotero_tags": [],
+  "human_review_policy": {
+    "enabled": false
+  },
+  "translation_review_sidecars": [],
+  "additional_sources": [],
+  "baseline": {
+    "validation_mode": "dynamic"
+  },
+  "fast_pdf_model_globs": [],
+  "zotero_enabled": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "project_id": "sxi_cusp",
+  "display_name": "SXI-cusp研究",
+  "reader_language": "zh-CN",
+  "translation_mode": "layered_bilingual",
+  "target_questions": [
+    "论文对 magnetic cusp、particle cusp、cleft/LLBL 或 mantle 中的哪一层提供证据？",
+    "论文结论如何连接到 SXI/SWCX 成像、LOS integration 与 instrument response？",
+    "哪些结论可直接使用，哪些只能作为 simulation-derived、proxy、candidate 或 mechanism support？"
+  ],
+  "terminology": {
+    "magnetic cusp": "磁拓扑或磁场几何意义上的 cusp",
+    "particle cusp": "依据粒子沉降或粒子谱识别的 cusp",
+    "cleft/LLBL": "应与 particle cusp 分开的日侧边界层/cleft 区域",
+    "SXI brightening": "SXI/SWCX 亮化；没有多源验证时不能直接称为 particle cusp",
+    "FTE": "flux transfer event；局地诊断或模拟形态不能自动升级为观测确认"
+  },
+  "relevance_dimensions": [
+    "SXI 成像与 SWCX emissivity",
+    "cusp / magnetopause 几何与反演",
+    "FTE / reconnection 机制",
+    "UVI / SuperDARN / ground / particle-field 联合观测",
+    "弱信号检测与证据分层"
+  ],
+  "claim_boundaries": [
+    "simulation、model、proxy、candidate 与 local diagnostic 必须保留其证据层级",
+    "SXI brightening 不得在缺少粒子与多源验证时直接写成 observed particle cusp",
+    "LOS 或 image-plane 一致性只能支持空间/几何一致性，不能单独证明物理来源",
+    "单篇论文对项目的迁移解释必须标为 project_application 或 codex_inference"
+  ],
+  "forbidden_phrases": [
+    "SXI directly proves an FTE",
+    "SXI brightening proves the particle cusp"
+  ],
+  "priority_policy": {
+    "P0": "deep_read_plus_external_context",
+    "P1": "deep_read_pdf_first",
+    "P2": "triage_then_on_demand_deep_read"
+  },
+  "external_research_policy": {
+    "trigger_priorities": ["P0"],
+    "trigger_on_controversy": true,
+    "min_sources": 2,
+    "max_sources": 5,
+    "roles": ["background", "independent_support", "limitation_or_counterevidence"],
+    "upload_local_pdf": false
+  }
+}

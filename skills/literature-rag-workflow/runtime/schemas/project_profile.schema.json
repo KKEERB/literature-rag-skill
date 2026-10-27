@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/project-profile-v1.json",
+  "title": "Literature Workflow Project Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "display_name",
+    "reader_language",
+    "translation_mode",
+    "target_questions",
+    "terminology",
+    "relevance_dimensions",
+    "claim_boundaries",
+    "forbidden_phrases",
+    "priority_policy",
+    "external_research_policy"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "project_id": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string", "minLength": 1},
+    "reader_language": {"type": "string", "minLength": 2},
+    "translation_mode": {"enum": ["layered_bilingual", "full_translation", "priority_adaptive"]},
+    "target_questions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "terminology": {"type": "object", "additionalProperties": {"type": "string"}},
+    "relevance_dimensions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "claim_boundaries": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "forbidden_phrases": {"type": "array", "items": {"type": "string"}},
+    "priority_policy": {"type": "object", "additionalProperties": {"type": "string"}},
+    "grading_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "thresholds", "reviewer_confirmation_required"],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label_zh", "minimum", "maximum"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "label_zh": {"type": "string", "minLength": 1},
+              "minimum": {"const": 0},
+              "maximum": {"const": 2}
+            }
+          }
+        },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["P0", "P1", "P2"],
+          "properties": {
+            "P0": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["min_total", "max_total", "required_fte_directness", "foundational_exception_allowed"],
+              "properties": {
+                "min_total": {"const": 8},
+                "max_total": {"const": 10},
+                "required_fte_directness": {"const": 2},
+                "foundational_exception_allowed": {"const": true}
+              }
+            },
+            "P1": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["min_total", "max_total", "scope_limited_exception_allowed"],
+              "properties": {
+                "min_total": {"const": 4},
+                "max_total": {"const": 7},
+                "scope_limited_exception_allowed": {"const": true}
+              }
+            },
+            "P2": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["min_total", "max_total"],
+              "properties": {
+                "min_total": {"const": 0},
+                "max_total": {"const": 3}
+              }
+            }
+          }
+        },
+        "reviewer_confirmation_required": {"const": true}
+      }
+    },
+    "external_research_policy": {
+      "type": "object",
+      "required": ["trigger_priorities", "trigger_on_controversy", "min_sources", "max_sources", "roles", "upload_local_pdf"],
+      "properties": {
+        "trigger_priorities": {"type": "array", "items": {"type": "string"}},
+        "trigger_on_controversy": {"type": "boolean"},
+        "min_sources": {"type": "integer", "minimum": 0},
+        "max_sources": {"type": "integer", "minimum": 1, "maximum": 5},
+        "roles": {"type": "array", "items": {"type": "string"}},
+        "upload_local_pdf": {"const": false}
+      }
+    }
+  }
+}

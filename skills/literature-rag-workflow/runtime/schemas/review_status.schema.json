@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/review-status-v2.json",
+  "title": "Project-neutral literature review status",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "project",
+    "project_id",
+    "paper_id",
+    "status",
+    "priority",
+    "project_relevance"
+  ],
+  "properties": {
+    "project": {
+      "enum": ["SXI-cusp研究", "FTE知识库", "磁层-电离层耦合"]
+    },
+    "project_id": {
+      "enum": ["sxi_cusp", "fte_knowledge", "magnetosphere_ionosphere"]
+    },
+    "paper_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["draft", "checked", "needs_fix"]},
+    "priority": {"enum": ["P0", "P1", "P2", "unknown"]},
+    "project_relevance": {"enum": ["high", "medium", "low", "unknown"]},
+    "sxi_cusp_relevance": {"enum": ["high", "medium", "low", "unknown"]},
+    "translation_mode": {"type": "string"},
+    "research_card_template_version": {
+      "enum": ["legacy", "research_daily_brief_v1"]
+    },
+    "fulltext_translation_status": {
+      "enum": ["staging", "blocked", "complete", "not_applicable"]
+    },
+    "fulltext_translation_template_version": {
+      "enum": ["academic_cn_fulltext_v1", "academic_cn_journal_v1"]
+    },
+    "fulltext_translation_path": {"type": "string"},
+    "fulltext_translation_sha256": {
+      "type": "string",
+      "pattern": "^(?:|[0-9a-f]{64})$"
+    },
+    "human_checked_by": {"type": "string"},
+    "human_checked_at": {"type": "string"},
+    "unresolved_critical_warnings": {"type": "array"},
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"project_id": {"const": "sxi_cusp"}}, "required": ["project_id"]},
+      "then": {
+        "properties": {"project": {"const": "SXI-cusp研究"}},
+        "required": ["sxi_cusp_relevance"]
+      }
+    },
+    {
+      "if": {"properties": {"project_id": {"const": "fte_knowledge"}}, "required": ["project_id"]},
+      "then": {"properties": {"project": {"const": "FTE知识库"}}}
+    },
+    {
+      "if": {"properties": {"project_id": {"const": "magnetosphere_ionosphere"}}, "required": ["project_id"]},
+      "then": {"properties": {"project": {"const": "磁层-电离层耦合"}}}
+    }
+  ]
+}

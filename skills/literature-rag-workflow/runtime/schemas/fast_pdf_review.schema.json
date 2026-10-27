@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent original-source review",
+  "type": "object",
+  "required": [
+    "schema",
+    "source_pdf_sha256",
+    "analysis_sha256",
+    "reviewer",
+    "independent_inventory",
+    "decisions",
+    "gaps",
+    "coverage_status"
+  ],
+  "properties": {
+    "schema": {
+      "const": "fast-pdf-review/1"
+    },
+    "source_pdf_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "analysis_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reviewer": {
+      "type": "object",
+      "required": [
+        "task_id",
+        "model",
+        "reasoning_effort"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[a-z][a-z0-9_-]{0,31}$"
+        }
+      }
+    },
+    "independent_inventory": {
+      "type": "object",
+      "required": [
+        "sections",
+        "figures_tables",
+        "core_results",
+        "pages_read"
+      ],
+      "properties": {
+        "pages_read": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1
+        },
+        "figures_tables": {
+          "type": "array"
+        },
+        "core_results": {
+          "type": "array",
+          "minItems": 1
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "state",
+          "checks",
+          "check_details",
+          "rationale_zh",
+          "source_pages",
+          "source_passage",
+          "support"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "verified",
+              "needs_review",
+              "quarantined"
+            ]
+          },
+          "checks": {
+            "$ref": "#/$defs/checks"
+          },
+          "check_details": {
+            "$ref": "#/$defs/details"
+          },
+          "rationale_zh": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_pages": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "source_passage": {
+            "type": "string",
+            "pattern": "^PDF PAGE [0-9]+\\n"
+          },
+          "support": {
+            "enum": [
+              "supported",
+              "unresolved",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array"
+    },
+    "coverage_status": {
+      "enum": [
+        "complete",
+        "partial"
+      ]
+    },
+    "visual_inspections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "page",
+          "path",
+          "sha256",
+          "observations"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "observations": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "checks": {
+      "type": "object",
+      "required": [
+        "whole_assertion",
+        "conditions_scope",
+        "numbers_units",
+        "attribution",
+        "epistemic_layer",
+        "compound_assertion"
+      ],
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "details": {
+      "type": "object",
+      "required": [
+        "whole_assertion",
+        "conditions_scope",
+        "numbers_units",
+        "attribution",
+        "epistemic_layer",
+        "compound_assertion"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

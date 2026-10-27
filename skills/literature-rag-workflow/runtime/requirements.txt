@@ -1,0 +1,7 @@
+# Direct dependencies observed on the macOS development host; these versions
+# are candidates, not a verified full dependency lock or Windows compatibility claim.
+pypdf==6.21.2
+pypdfium2==5.8.0
+jsonschema==4.26.0
+pdfplumber==0.11.9
+reportlab==5.1.0

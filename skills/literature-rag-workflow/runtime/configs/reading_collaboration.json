@@ -1,0 +1,30 @@
+{
+  "schema": "reading-collaboration-policy/1",
+  "default_intake": "fast_pdf_two_round",
+  "deep_reading_trigger": "explicit_human_selection",
+  "discussion_mode": "ten_item_checklist",
+  "reference_answers": "collapsed",
+  "whole_paper_acceptance_from_quiz": false,
+  "knowledge_database": "~/.literature-rag-workflow/knowledge.sqlite3",
+  "checklist_size": 10,
+  "rejected_item_policy": "cite_with_explicit_dissent",
+  "monthly_sample": {
+    "papers": 20,
+    "items_per_paper": 3,
+    "new_changed": 10,
+    "disputed": 5,
+    "historical_rotation": 5
+  },
+  "checklist_selection": {
+    "version": "interpretation-first-v2",
+    "factual_target": 2,
+    "factual_max": 3,
+    "priority": [
+      "figure_interpretation",
+      "mechanism_inference",
+      "interpretive_boundary"
+    ],
+    "insufficient_interpretation": "show_fewer_items_without_factual_padding",
+    "frozen_checklists": "preserve_existing_content_and_order"
+  }
+}

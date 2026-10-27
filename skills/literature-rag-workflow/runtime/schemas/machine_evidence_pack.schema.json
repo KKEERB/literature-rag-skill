@@ -1,0 +1,1058 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/machine-evidence-pack-v2.json",
+  "title": "Literature Knowledge Model v2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "project",
+    "project_profile",
+    "paper_id",
+    "title",
+    "zotero_item_key",
+    "zotero_attachment_key",
+    "source_pdf_sha256",
+    "priority",
+    "status",
+    "paper_type",
+    "translation_mode",
+    "topic_tags",
+    "reading_map",
+    "section_guides",
+    "core_claims",
+    "methods",
+    "figures",
+    "limitations",
+    "controversies",
+    "external_context",
+    "project_relations",
+    "cannot_support",
+    "self_test",
+    "generation"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "generation"
+        ],
+        "properties": {
+          "generation": {
+            "required": [
+              "content_policy"
+            ],
+            "properties": {
+              "content_policy": {
+                "const": "adaptive_coverage_v1"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "self_test": {
+            "minItems": 10,
+            "maxItems": 12
+          },
+          "research_card": {
+            "properties": {
+              "objective_challenges": {
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "qa_ids": {
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "oneOf": [
+        {
+          "properties": {
+            "zotero_item_key": {
+              "const": ""
+            },
+            "zotero_attachment_key": {
+              "const": ""
+            }
+          }
+        },
+        {
+          "properties": {
+            "zotero_item_key": {
+              "pattern": "^[A-Z0-9]{8}$"
+            },
+            "zotero_attachment_key": {
+              "pattern": "^[A-Z0-9]{8}$"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "evidenceAnchor": {
+      "type": "object",
+      "required": [
+        "pdf_page_index",
+        "printed_page_label",
+        "section",
+        "figure",
+        "table",
+        "quote"
+      ],
+      "properties": {
+        "pdf_page_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "printed_page_label": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        },
+        "figure": {
+          "type": "string"
+        },
+        "table": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        }
+      }
+    },
+    "knowledgeItem": {
+      "type": "object",
+      "required": [
+        "id",
+        "chunk_id",
+        "source_kind",
+        "epistemic_status",
+        "support_level",
+        "verification_status",
+        "text",
+        "text_zh",
+        "evidence",
+        "retrieval_queries_zh",
+        "retrieval_queries_en",
+        "related_chunk_ids",
+        "usable_for",
+        "cannot_support"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chunk_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "source_kind": {
+          "enum": [
+            "paper",
+            "external",
+            "model",
+            "project"
+          ]
+        },
+        "epistemic_status": {
+          "enum": [
+            "reported_result",
+            "author_interpretation",
+            "author_limitation",
+            "external_finding",
+            "codex_inference",
+            "project_application"
+          ]
+        },
+        "support_level": {
+          "enum": [
+            "direct",
+            "indirect",
+            "speculative"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "anchored",
+            "externally_verified",
+            "needs_human_check"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "text_zh": {
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidenceAnchor"
+        },
+        "retrieval_queries_zh": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "retrieval_queries_en": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_chunk_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usable_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cannot_support": {
+          "type": "string"
+        }
+      }
+    },
+    "researchCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "template_version",
+        "daily_summary_zh",
+        "method_id",
+        "finding_items",
+        "key_figure_id",
+        "project_value_zh",
+        "project_relation_ids",
+        "objective_challenges",
+        "qa_ids",
+        "next_action_zh"
+      ],
+      "properties": {
+        "template_version": {
+          "const": "research_daily_brief_v1"
+        },
+        "daily_summary_zh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method_id": {
+          "type": "string",
+          "pattern": "^M[0-9]+$"
+        },
+        "finding_items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "summary_zh",
+              "claim_ids"
+            ],
+            "properties": {
+              "summary_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "claim_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^C[0-9]+$"
+                }
+              }
+            }
+          }
+        },
+        "key_figure_id": {
+          "type": "string",
+          "pattern": "^F[0-9]+$"
+        },
+        "project_value_zh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_relation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^P[0-9]+$"
+          }
+        },
+        "objective_challenges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "epistemic_status",
+              "question_zh",
+              "basis_ids",
+              "impact_zh",
+              "minimum_validation_zh"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "method_or_data_limit",
+                  "alternative_or_internal_consistency",
+                  "project_transfer_boundary"
+                ]
+              },
+              "epistemic_status": {
+                "enum": [
+                  "author_limitation",
+                  "codex_inference",
+                  "project_application"
+                ]
+              },
+              "question_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "basis_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[CMLFP][0-9]+$"
+                }
+              },
+              "impact_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minimum_validation_zh": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "qa_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^Q[0-9]+$"
+          }
+        },
+        "next_action_zh": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "readerNote": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "template_version",
+        "one_sentence_summary",
+        "guiding_questions",
+        "core_work",
+        "background",
+        "physical_mechanism",
+        "first_principles",
+        "method_audit",
+        "contribution_audit",
+        "critical_audit",
+        "research_transfer",
+        "group_meeting_summary"
+      ],
+      "properties": {
+        "template_version": {
+          "const": "space_physics_research_training_v1"
+        },
+        "one_sentence_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "guiding_questions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "core_work": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "what_zh",
+              "why_zh",
+              "how_zh",
+              "result_zh",
+              "claim_ids",
+              "method_ids"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "what_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "why_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "how_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "result_zh": {
+                "type": "string",
+                "minLength": 1
+              },
+              "claim_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "method_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "background": {
+          "type": "object",
+          "required": [
+            "known_zh",
+            "gap_zh",
+            "paper_response_zh"
+          ],
+          "properties": {
+            "known_zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "gap_zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "paper_response_zh": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "physical_mechanism": {
+          "type": "object",
+          "required": [
+            "phenomenon_zh",
+            "cause_chain",
+            "equations_or_constraints",
+            "observables"
+          ],
+          "properties": {
+            "phenomenon_zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "cause_chain": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string"
+              }
+            },
+            "equations_or_constraints": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "observables": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "first_principles": {
+          "type": "object",
+          "required": [
+            "applicability",
+            "reason_zh",
+            "starting_points",
+            "derivation_chain",
+            "assumptions",
+            "method_rationale_zh",
+            "claim_assessments",
+            "new_questions"
+          ],
+          "properties": {
+            "applicability": {
+              "enum": [
+                "required",
+                "optional",
+                "not_applicable"
+              ]
+            },
+            "reason_zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "starting_points": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "derivation_chain": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "assumption_zh",
+                  "physical_basis_zh",
+                  "confidence",
+                  "risk_zh",
+                  "related_claim_ids"
+                ],
+                "properties": {
+                  "assumption_zh": {
+                    "type": "string"
+                  },
+                  "physical_basis_zh": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "risk_zh": {
+                    "type": "string"
+                  },
+                  "related_claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "method_rationale_zh": {
+              "type": "string"
+            },
+            "claim_assessments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "claim_id",
+                  "grade",
+                  "rationale_zh"
+                ],
+                "properties": {
+                  "claim_id": {
+                    "type": "string"
+                  },
+                  "grade": {
+                    "enum": [
+                      "strong_support",
+                      "reasonable_inference",
+                      "model_dependent",
+                      "not_demonstrated"
+                    ]
+                  },
+                  "rationale_zh": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "new_questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "method_audit": {
+          "type": "object",
+          "required": [
+            "design_summary_zh",
+            "checks"
+          ],
+          "properties": {
+            "design_summary_zh": {
+              "type": "string",
+              "minLength": 1
+            },
+            "checks": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "required": [
+                  "item_zh",
+                  "finding_zh",
+                  "evidence_ids",
+                  "risk_zh"
+                ],
+                "properties": {
+                  "item_zh": {
+                    "type": "string"
+                  },
+                  "finding_zh": {
+                    "type": "string"
+                  },
+                  "evidence_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "risk_zh": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "contribution_audit": {
+          "type": "object",
+          "required": [
+            "previous_state_zh",
+            "contributions",
+            "publication_value_zh",
+            "remaining_uncertainty_zh"
+          ],
+          "properties": {
+            "previous_state_zh": {
+              "type": "string"
+            },
+            "contributions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "text_zh",
+                  "claim_ids"
+                ],
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "scientific_question",
+                      "method",
+                      "physical_understanding",
+                      "observation_window",
+                      "constraint"
+                    ]
+                  },
+                  "text_zh": {
+                    "type": "string"
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "publication_value_zh": {
+              "type": "string"
+            },
+            "remaining_uncertainty_zh": {
+              "type": "string"
+            }
+          }
+        },
+        "critical_audit": {
+          "type": "object",
+          "required": [
+            "evidence_strength_zh",
+            "method_limits",
+            "alternative_explanations",
+            "future_directions"
+          ],
+          "properties": {
+            "evidence_strength_zh": {
+              "type": "string"
+            },
+            "method_limits": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alternative_explanations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "future_directions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "research_transfer": {
+          "type": "object",
+          "required": [
+            "direct_relation_ids",
+            "adaptable_relation_ids",
+            "not_applicable_zh",
+            "new_questions"
+          ],
+          "properties": {
+            "direct_relation_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "adaptable_relation_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "not_applicable_zh": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "new_questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "group_meeting_summary": {
+          "type": "object",
+          "required": [
+            "background_zh",
+            "research_question_zh",
+            "core_work_zh",
+            "main_contribution_zh",
+            "main_limitation_zh",
+            "research_takeaway_zh"
+          ],
+          "properties": {
+            "background_zh": {
+              "type": "string"
+            },
+            "research_question_zh": {
+              "type": "string"
+            },
+            "core_work_zh": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "items": {
+                "type": "string"
+              }
+            },
+            "main_contribution_zh": {
+              "type": "string"
+            },
+            "main_limitation_zh": {
+              "type": "string"
+            },
+            "research_takeaway_zh": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0"
+    },
+    "project": {
+      "type": "string"
+    },
+    "project_profile": {
+      "type": "string"
+    },
+    "paper_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "zotero_item_key": {
+      "type": "string"
+    },
+    "zotero_attachment_key": {
+      "type": "string"
+    },
+    "source_pdf_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "priority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "unknown"
+      ]
+    },
+    "grading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimensions",
+        "total_score",
+        "assigned_priority",
+        "core_support",
+        "scope_limited",
+        "rationale_zh",
+        "reviewer_confirmed",
+        "reviewer_task_id",
+        "foundational_exception",
+        "exception_rationale_zh"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fte_directness",
+            "mechanism_topology_value",
+            "method_reusability",
+            "quantitative_evidence_strength",
+            "cross_observation_simulation_validation"
+          ],
+          "properties": {
+            "fte_directness": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "mechanism_topology_value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "method_reusability": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "quantitative_evidence_strength": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "cross_observation_simulation_validation": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        },
+        "total_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "assigned_priority": {
+          "enum": [
+            "P0",
+            "P1",
+            "P2"
+          ]
+        },
+        "core_support": {
+          "enum": [
+            "claim",
+            "method",
+            "validation",
+            "none"
+          ]
+        },
+        "scope_limited": {
+          "type": "boolean"
+        },
+        "rationale_zh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer_confirmed": {
+          "type": "boolean"
+        },
+        "reviewer_task_id": {
+          "type": "string"
+        },
+        "foundational_exception": {
+          "type": "boolean"
+        },
+        "exception_rationale_zh": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "checked",
+        "needs_fix"
+      ]
+    },
+    "paper_type": {
+      "enum": [
+        "observational",
+        "simulation",
+        "theory",
+        "review",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "translation_mode": {
+      "const": "layered_bilingual"
+    },
+    "topic_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reader_note": {
+      "$ref": "#/$defs/readerNote"
+    },
+    "research_card": {
+      "$ref": "#/$defs/researchCard"
+    },
+    "reading_map": {
+      "type": "object"
+    },
+    "section_guides": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "core_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/knowledgeItem"
+      }
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledgeItem"
+      }
+    },
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledgeItem"
+      }
+    },
+    "controversies": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "external_context": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object"
+      }
+    },
+    "project_relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledgeItem"
+      }
+    },
+    "cannot_support": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "self_test": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "generation": {
+      "type": "object"
+    }
+  }
+}
